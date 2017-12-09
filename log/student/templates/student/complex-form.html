@@ -13,20 +13,18 @@
 
   </head>
   <body>
-    <h3>student ID:</h3>
-    <input type="text" placeholder="Enter your ID" class="form-control" id="studentIDinput">
+    <h3>student ID:{{user.username}}</h3>
     <br>
-    <a href="/my_student/complexform/" onclick="aaaa(this)" class="btn btn-success">Submit</a>
+    <a onclick="clickButton()" class="btn btn-success">Click</a>
     <input type="text" id="myField" value="xxxxxx" />
 
-    test {{user.username}}
     {% block body %}
       {% for a in object_list %}
-        {% if a.subjectFK.StudentID == user.username %}
+      {% if a.subjectFK.StudentID == user.username %}
       <h3>>>ModuleFK:{{a.subjectFK.id}}----StudentID:{{a.subjectFK.StudentID}}----SubjectID:{{a.SubjectID}}
         ----Subject:{{a.SubjectName}}----Section{{a.Section}}</h3>
       <br>
-        {% endif %}
+      {% endif %}
       {% endfor %}
     {% endblock %}
 
@@ -36,9 +34,8 @@
 </html>
 
 <script>
-function aaaa(){
-  var studentIDvar = document.getElementById("studentIDinput").value;
-  document.getElementById("myField").value = studentIDvar;
-  console.log(studentIDvar);
+function clickButton(){
+  // var studentIDvar = document.getElementById("studentIDinput").value;
+  document.getElementById("myField").value = "Button was clicked!";
 }
 </script>

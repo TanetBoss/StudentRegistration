@@ -18,6 +18,7 @@ class Department(models.Model):
 
 class Student(models.Model):
     department = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
+    StudentID = models.CharField(max_length=10, default='xxxxxxxxxx')
     name = models.CharField(max_length = 200, default='NAME')
     Degree = models.CharField(max_length = 200, default='DEG')
     DOB = models.CharField(max_length = 200, default='DEF')
