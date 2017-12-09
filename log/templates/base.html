@@ -16,6 +16,8 @@
       Hi {{ user.username }}!
       <br>
       <a href="{% url 'student:studentform' %}" class="btn btn-success">Go to student form</a>
+      <a href="{% url 'student:student-manage' %}" class="btn btn-success">ADD/DELETE Subject</a>
+      <br>
       <a href="{% url 'logout' %}">logout</a>
 
     {% else %}
