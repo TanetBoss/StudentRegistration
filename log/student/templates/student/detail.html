@@ -21,18 +21,14 @@
                     </a>
                     <h1>{{ department.DepName }}</h1>
                     <h2>Tel : {{ department.DepTel}}</h2>
-                    <h3>Head of Department : {{ department.DepHead }}</h3>
+                    <h3>Head : </h3>
+                    <h4>{{ department.DepHead }}</h4>
                 </div>
             </div>
         </div>
 
         <!-- Right Song Info -->
         <div class="col-sm-8 col-md-9">
-
-            <ul class="nav nav-pills" style="margin-bottom: 10px;">
-                <li role="presentation" class="active"><a href="{% url 'student:detail' department.id %}">View All</a></li>
-                <li role="presentation"><a href="#">Add New Student</a></li>
-            </ul>
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -60,7 +56,7 @@
                                  <td>{{ student.Tel }}</td>
                                 <td>{{ student.Degree }}</td>
                                 <td>
-                                    <form action="#" method="post" style="display: inline;">
+                                    <form action="{% url 'student:student-delete' student.id %}" method="post" style="display: inline;">
                                         {% csrf_token %}
                                         <input type="hidden" name="student_id" value="{{ student.id }}" />
                                         <button type="submit" class="btn btn-danger btn-xs">

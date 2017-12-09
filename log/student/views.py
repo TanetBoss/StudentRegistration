@@ -27,6 +27,30 @@ class IndexView(generic.ListView):
         return Department.objects.all()
 
 
+class StudentIndexView(generic.ListView):
+    template_name = 'student/Sindex.html'
+    context_object_name = 'all_students'
+
+    def get_queryset(self):
+        return Student.objects.all()
+
+
+class StudentCreate(CreateView):
+    model = Student
+    fields = ['department', 'name', 'Degree', 'DOB', 'Tel', 'status']
+    success_url = reverse_lazy('student:index')
+
+class StudentUpdate(UpdateView):
+    model = Student
+    fields = ['department', 'name', 'Degree', 'DOB', 'Tel', 'status']
+    success_url = reverse_lazy('student:index')
+
+class StudentDelete(DeleteView):
+    model = Student
+    success_url = reverse_lazy('student:Sindex')
+
+
+
 class DetailView(generic.DetailView):
     model = Department
     template_name = 'student/detail.html'
