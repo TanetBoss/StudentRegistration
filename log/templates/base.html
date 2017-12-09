@@ -7,14 +7,22 @@
 <body>
   <header>
     <h1>Student Registration System</h1>
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user.is_superuser %} <!--admin-->
       Hi {{ user.username }}!
       <a href="{% url 'student:index' %}"><h1>Manage Department</h1></a>
       <br>
       <a href="{% url 'logout' %}">logout</a>
+    {% elif user.is_authenticated %} <!--student-->
+      Hi {{ user.username }}!
+      <br>
+      <a href="{% url 'student:studentform' %}" class="btn btn-success">Go to student form</a>
+      <a href="{% url 'logout' %}">logout</a>
+
     {% else %}
       <a href="{% url 'login' %}">login</a>
     {% endif %}
+
+
   </header>
   <hr>
   <main>

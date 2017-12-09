@@ -5,9 +5,9 @@ app_name = 'student'
 
 urlpatterns = [
 
-
-
     url(r'^$',views.IndexView.as_view(), name ='index'),
+
+    url(r'^studentform/$', views.StudentFormView.as_view(), name='studentform'),
 
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
 
@@ -19,4 +19,3 @@ urlpatterns = [
 
     url(r'department/(?P<pk>[0-9]+)/delete/$', views.DepartmentDelete.as_view(), name='department-delete'),
 ]
-
