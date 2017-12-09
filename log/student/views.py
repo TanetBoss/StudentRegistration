@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import  authenticate,login
 from django.urls import reverse_lazy
 from django.views.generic import View
-from .models import Department
+from .models import Department, Student, Subject
 from .forms import UserForm
 
 
@@ -12,6 +12,12 @@ class Home(generic.ListView):
     template_name = 'student/home.html'
     def get_queryset(self):
         return Department.objects.all()
+
+class StudentFormView(generic.ListView):
+    template_name = 'student/complex-form.html'
+
+    def get_queryset(self):
+        return Subject.objects.all()
 
 class IndexView(generic.ListView):
     template_name = 'student/index.html'
@@ -72,4 +78,3 @@ class UserFormView(View):
                     login(request,user)
                     return redirect('student:index')
         return render(request,self.template_name,{'form':form})
-

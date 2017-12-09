@@ -17,14 +17,22 @@ class Department(models.Model):
         return self.DepName
 
 class Student(models.Model):
-    department = models.ForeignKey(Department, on_delete = models.CASCADE)
-    name = models.CharField(max_length = 200)
-    Degree = models.CharField(max_length = 200)
-    DOB = models.CharField(max_length = 200)
-    Tel = models.CharField(max_length = 200)
+    department = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
+    name = models.CharField(max_length = 200, default='NAME')
+    Degree = models.CharField(max_length = 200, default='DEG')
+    DOB = models.CharField(max_length = 200, default='DEF')
+    Tel = models.CharField(max_length = 200, default='TEL')
     status = models.BooleanField(default=False)
 
 
     def __str__(self):
         return self.name
 
+class Subject(models.Model):
+    subjectFK = models.ForeignKey(Student, on_delete=models.CASCADE)
+    SubjectID = models.CharField(max_length=10)
+    SubjectName = models.CharField(max_length=30)
+    Section = models.CharField(max_length=2)
+
+    def __str__(self):
+        return self.SubjectName

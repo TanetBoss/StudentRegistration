@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Student Complex</title>
+    {% load staticfiles %}
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <!-- <link rel="stylesheet" type="text/css" href="{% static 'student_info/style.css' %}" /> -->
+      <!-- <script src="{% static 'complex.js' %}"></script> -->
+
+  </head>
+  <body>
+    <h3>student ID:</h3>
+    <input type="text" placeholder="Enter your ID" class="form-control" id="studentIDinput">
+    <br>
+    <a href="/my_student/complexform/" onclick="aaaa(this)" class="btn btn-success">Submit</a>
+    <input type="text" id="myField" value="xxxxxx" />
+
+    test {{user.username}}
+    {% block body %}
+      {% for a in object_list %}
+        {% if a.subjectFK.StudentID == user.username %}
+      <h3>>>ModuleFK:{{a.subjectFK.id}}----StudentID:{{a.subjectFK.StudentID}}----SubjectID:{{a.SubjectID}}
+        ----Subject:{{a.SubjectName}}----Section{{a.Section}}</h3>
+      <br>
+        {% endif %}
+      {% endfor %}
+    {% endblock %}
+
+    <a href="/my_student" class="btn btn-success">Back to home</a>
+
+  </body>
+</html>
+
+<script>
+function aaaa(){
+  var studentIDvar = document.getElementById("studentIDinput").value;
+  document.getElementById("myField").value = studentIDvar;
+  console.log(studentIDvar);
+}
+</script>
