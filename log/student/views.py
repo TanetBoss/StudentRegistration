@@ -19,6 +19,13 @@ class StudentFormView(generic.ListView):
     def get_queryset(self):
         return Subject.objects.all()
 
+class StudentManageView(generic.ListView):
+    template_name = 'student/studentmanage.html'
+
+    def get_queryset(self):
+        return Subject.objects.all()
+
+
 class IndexView(generic.ListView):
     template_name = 'student/index.html'
     context_object_name = 'all_departments'
