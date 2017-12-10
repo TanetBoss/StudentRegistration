@@ -36,6 +36,7 @@ class Student(models.Model):
         return self.name
 
 class Subject(models.Model):
+    sub_sec_FK = models.ForeignKey('Section', on_delete=models.CASCADE, blank=True, null=True)
     SubjectID = models.CharField(max_length=8)
     SubjectName = models.CharField(max_length=30)
     Prerequisite = models.CharField(max_length=8, default=None, blank=True, null=True)
@@ -44,6 +45,15 @@ class Subject(models.Model):
 
     def __str__(self):
         return self.SubjectName
+
+class Section(models.Model):
+    sec_subject_FK = models.ForeignKey(Subject, on_delete=models.CASCADE,default=None, blank=True, null=True)
+    SectionNo = models.CharField(max_length=2)
+    TotalSeat = models.IntegerField()
+    LessonTime = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.SectionNo
 
 class History(models.Model):
     his_student_FK = models.ForeignKey(Student, on_delete=models.CASCADE)

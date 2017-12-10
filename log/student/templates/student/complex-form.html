@@ -15,8 +15,9 @@
   <body>
     <h3>student ID:{{user.username}}</h3>
     <br>
-    <a onclick="clickButton()" class="btn btn-success">Click</a>
+    <a onclick="clickButton()" class="btn btn-success" >Click</a>
     <input type="text" id="myField" value="xxxxxx" />
+    <input name="smname" id="smname" />
 
     {% block body %}
       {% for a in object_list %}
@@ -37,7 +38,7 @@
 
 <script>
 function clickButton(){
-  // var studentIDvar = document.getElementById("studentIDinput").value;
-  document.getElementById("myField").value = "Button was clicked!";
+  var studentIDvar = document.getElementById("myField").value;
+  document.getElementById('smname').value = studentIDvar;
 }
 </script>
