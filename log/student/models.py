@@ -19,7 +19,7 @@ class Department(models.Model):
         return self.DepNo + '--' + self.DepName
 
 class Student(models.Model):
-    department = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
+    stu_dep_FK = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
     StudentID = models.CharField(max_length=11)
     Degree = models.CharField(max_length = 20, default='DEG')
     name = models.CharField(max_length = 50, default='NAME')
@@ -36,7 +36,6 @@ class Student(models.Model):
         return self.name
 
 class Subject(models.Model):
-    subjectFK = models.ForeignKey(Student, on_delete=models.CASCADE)
     SubjectID = models.CharField(max_length=8)
     SubjectName = models.CharField(max_length=30)
     Prerequisite = models.CharField(max_length=8, default=None, blank=True, null=True)
@@ -45,3 +44,12 @@ class Subject(models.Model):
 
     def __str__(self):
         return self.SubjectName
+
+class History(models.Model):
+    his_student_FK = models.ForeignKey(Student, on_delete=models.CASCADE)
+    his_subject_FK = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    StudyYet = models.BooleanField()
+    Grade = models.CharField(max_length=2)
+
+    def __str__(self):
+        return self.his_student_FK.name + '--' + self.his_subject_FK.SubjectName
