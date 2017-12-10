@@ -80,6 +80,7 @@
       <a href="{% url 'student:avg-dep' %}" class="btn btn-info btn-lg"><h1> <span class="glyphicon glyphicon-info-sign"></span> Analysis Report </h1></a>
       <br><br><br>
 
+
     {% elif user.is_authenticated %} <!--student-->
      <h1><font color="Grey">  What you want to do ? </font></h1>
       <br>
@@ -88,6 +89,8 @@
      <br><br><br>
       <a href="{% url 'student:student-manage' %}" class="btn btn-warning btn-lg"><h1> <span class="glyphicon glyphicon-pencil"></span> ADD/DELETE Subject</h1></a>
      <br><br><br>
+       <a href="{% url 'student:Lindex' %}" class="btn btn-danger btn-lg"><h1> <span class="glyphicon glyphicon-pencil"></span> View Profile (Lecturer only)</h1></a>
+      <br><br><br>
       <a href="{% url 'student:avg-dep' %}" class="btn btn-info btn-lg"><h1> <span class="glyphicon glyphicon-info-sign"></span> Analysis Report </h1></a>
 
 

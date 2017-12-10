@@ -6,7 +6,7 @@ from django.template import loader
 from django.contrib.auth import  authenticate,login
 from django.urls import reverse_lazy
 from django.views.generic import View
-from .models import Department, Student, Subject, History
+from .models import Department, Student, Subject, History, LecturerInSection
 from .models import Lecturer
 from .models import LecturerResearch
 from login.forms import UserForm
@@ -182,13 +182,10 @@ class LecturerDelete(DeleteView):
     success_url = reverse_lazy('student:Lindex')
 
 
-
-
 class ResearchCreate(CreateView):
     model = LecturerResearch
     fields = ['research_lec_FK', 'ResearchName', 'Category', 'Description']
     success_url = reverse_lazy('student:Lindex')
-
 
 
 class ResearchDelete(DeleteView):
@@ -198,4 +195,15 @@ class ResearchDelete(DeleteView):
 class ResearchUpdate(UpdateView):
     model = LecturerResearch
     fields = ['research_lec_FK', 'ResearchName', 'Category', 'Description']
+    success_url = reverse_lazy('student:Lindex')
+
+
+class CourseCreate(CreateView):
+    model = Subject
+    fields = ['sub_sec_FK', 'SubjectID', 'SubjectName', 'Prerequisite', 'Semester', 'Credit']
+    success_url = reverse_lazy('student:Lindex')
+
+class AssignLecturer(CreateView):
+    model = LecturerInSection
+    fields = ['lecsec_sub_FK', 'lecsec_sec_FK', 'lecsec_lec_FK', 'order']
     success_url = reverse_lazy('student:Lindex')

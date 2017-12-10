@@ -7,11 +7,11 @@
     <!-- Albums -->
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="text text-center">ALL Lecturers </h1>
             <h3  class="text text-center">Click View to see information</h3>
         </div>
         {% if all_lecturers %}
             {% for lecturer in all_lecturers %}
+                 {% if lecturer.LecturerID == user.username or user.is_superuser %}
                 <div class="col-sm-4 col-lg-3">
                     <div class="thumbnail">
     <a href="{% url 'student:Ldetail' lecturer.id  %}">
@@ -34,7 +34,7 @@
                             <a href="{% url 'student:lecturer-update' lecturer.id %}" class="btn btn-primary btn-sm" role="button">
                                 <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; Edit
                             </a>
-
+                            {% if user.is_superuser %}
                             <!-- Delete Album -->
                             <form action="{% url 'student:lecturer-delete' lecturer.id %}" method="post" style="display: inline;">
                                 {% csrf_token %}
@@ -43,12 +43,15 @@
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
                             </form>
+                            {% endif %}
 
 
                         </div>
                     </div>
                 </div>
+            {% else %}
 
+            {% endif %}
             {% endfor %}
 
         {% endif %}
