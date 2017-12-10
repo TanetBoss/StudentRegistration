@@ -7,13 +7,9 @@ urlpatterns = [
 
     url(r'^$',views.IndexView.as_view(), name ='index'),
 
-<<<<<<< HEAD
     url(r'^avgdep/$', views.AVGdepartment, name='avg-dep'),
 
     url(r'^students/$', views.StudentIndexView.as_view(), name='Sindex'),
-=======
-    url(r'^students/$', views.StudentIndex, name='Sindex'),
->>>>>>> 85d1b5bc888f5fc16bd121907cc96e393bb635d6
 
     url(r'^studentform/$', views.StudentFormView.as_view(), name='studentform'),
 
