@@ -37,20 +37,29 @@ class Credit(models.Model):
 class Lecturer(models.Model):
     lec_dep_FK = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
     LecturerID = models.CharField(max_length = 11)
+    LecturerDegree = models.CharField(max_length=20)
     LecturerName = models.CharField(max_length = 50)
     LecturerAddress = models.CharField(max_length = 100, default=None, blank=True, null=True)
     LecturerTel = models.CharField(max_length = 12, default=None, blank=True, null=True)
     LecturerRating = models.FloatField(default=None, blank=True, null=True)
     LecturerEmail = models.CharField(max_length = 50, default=None, blank=True, null=True)
+    LecturerProfile = models.ImageField()
+
+    def get_absolute_url(self):
+        return reverse('student:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.LecturerName
 
 class LecturerResearch(models.Model):
-    reser_lec_FK = models.ForeignKey(Lecturer,on_delete=models.CASCADE)
+    research_lec_FK = models.ForeignKey(Lecturer,on_delete=models.CASCADE)
     ResearchName = models.CharField(max_length=30)
     Category =	models.CharField(max_length=20)
     Description = models.CharField(max_length=150)
+
+
+    def get_absolute_url(self):
+        return reverse('student:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.ResearchName + ' -- ' + self.Category
