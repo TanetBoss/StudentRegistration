@@ -7,6 +7,8 @@ from django.contrib.auth import  authenticate,login
 from django.urls import reverse_lazy
 from django.views.generic import View
 from .models import Department, Student, Subject, History
+from .models import Lecturer
+from .models import LecturerResearch
 from login.forms import UserForm
 
 
@@ -150,3 +152,50 @@ class UserFormView(View):
                     login(request,user)
                     return redirect('student:index')
         return render(request,self.template_name,{'form':form})
+
+
+
+class LIndexView(generic.ListView):
+    template_name = 'student/Lindex.html'
+    context_object_name = 'all_lecturers'
+    def get_queryset(self):
+        return Lecturer.objects.all()
+
+
+class LDetailView(generic.DetailView):
+    model = Lecturer
+    template_name = 'student/Ldetail.html'
+
+
+class LecturerCreate(CreateView):
+    model = Lecturer
+    fields = ['lec_dep_FK','LecturerID','LecturerDegree','LecturerName','LecturerAddress','LecturerTel','LecturerEmail','LecturerProfile']
+    success_url = reverse_lazy('student:Lindex')
+
+class LecturerUpdate(UpdateView):
+    model = Lecturer
+    fields = ['lec_dep_FK','LecturerID','LecturerDegree','LecturerName','LecturerAddress','LecturerTel','LecturerEmail','LecturerProfile']
+    success_url = reverse_lazy('student:Lindex')
+
+class LecturerDelete(DeleteView):
+    model = Lecturer
+    success_url = reverse_lazy('student:Lindex')
+
+
+
+
+class ResearchCreate(CreateView):
+    model = LecturerResearch
+    fields = ['research_lec_FK', 'ResearchName', 'Category', 'Description']
+    success_url = reverse_lazy('student:Lindex')
+
+
+
+class ResearchDelete(DeleteView):
+    model = LecturerResearch
+    success_url = reverse_lazy('student:Lindex')
+
+class ResearchUpdate(UpdateView):
+    model = LecturerResearch
+    fields = ['research_lec_FK', 'ResearchName', 'Category', 'Description']
+    success_url = reverse_lazy('student:Lindex')

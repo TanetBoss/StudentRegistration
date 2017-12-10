@@ -30,4 +30,13 @@ urlpatterns = [
     url(r'department/(?P<pk>[0-9]+)/$', views.DepartmentUpdate.as_view(), name='department-update'),
 
     url(r'department/(?P<pk>[0-9]+)/delete/$', views.DepartmentDelete.as_view(), name='department-delete'),
+
+    url(r'^lindex/$', views.LIndexView.as_view(), name='Lindex'),
+    url(r'^lindex/(?P<pk>[0-9]+)/$',views.LDetailView.as_view(), name='Ldetail'),
+    url(r'lecturer/lindex/add/$',views.LecturerCreate.as_view(), name='lecturer-add'),
+    url(r'research/lindex/add/$',views.ResearchCreate.as_view(), name='research-add'),
+    url(r'lecturer/lindex/(?P<pk>[0-9]+)/$', views.LecturerUpdate.as_view(), name='lecturer-update'),
+    url(r'research/lindex/(?P<pk>[0-9]+)/$', views.ResearchUpdate.as_view(), name='research-update'),
+    url(r'research/lindex/(?P<pk>[0-9]+)/delete/$', views.ResearchDelete.as_view(), name='research-delete'),
+    url(r'lecturer/lindex/(?P<pk>[0-9]+)/delete/$', views.LecturerDelete.as_view(), name='lecturer-delete'),
 ]
