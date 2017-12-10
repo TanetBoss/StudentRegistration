@@ -7,7 +7,7 @@ urlpatterns = [
 
     url(r'^$',views.IndexView.as_view(), name ='index'),
 
-    url(r'^students/$', views.StudentIndexView.as_view(), name='Sindex'),
+    url(r'^students/$', views.StudentIndex, name='Sindex'),
 
     url(r'^studentform/$', views.StudentFormView.as_view(), name='studentform'),
 

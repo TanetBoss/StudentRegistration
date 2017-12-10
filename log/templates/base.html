@@ -56,14 +56,13 @@
 
 </nav>
 
-
+{% if user.is_authenticated == False %}
   <ul class="nav nav-tabs">
-  <li><a href="{% url 'home' %}">Home</a></li>
   <li><a href="{% url 'login' %}">Login</a></li>
   <li><a href="{% url 'register' %}">SignUp</a></li>
 </ul>
 
-
+{% endif %}
 
 
 

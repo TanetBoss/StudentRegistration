@@ -14,7 +14,13 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
+
                     <h3>All Students</h3>
+
+                    <form method='GET' action=''>
+                        <input type='text' name='q' placeholder='Search student name'/>
+                        <input type='submit' value='Search'/>
+                    </form>
 
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
@@ -28,16 +34,18 @@
                             <th>DOB</th>
                             <th>Tel</th>
                             <th>Degree</th>
+                            <th>GPAX</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for student in all_students %}
                             <tr>
                                 <td>{{ student.name }}</td>
-                                <td>{{ student.department.DepName }}</td>
+                                <td>{{ student.stu_dep_FK.DepName }}</td>
                                  <td>{{ student.DOB }}</td>
                                  <td>{{ student.Tel }}</td>
                                 <td>{{ student.Degree }}</td>
+                                 <td>{{ student.GPAX }}</td>
                                 <td>
                                    <a href="{% url 'student:student-update' student.id %}" class="btn btn btn-warning" role="button">Edit</a>
                                 </td>
