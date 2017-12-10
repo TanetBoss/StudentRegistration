@@ -18,6 +18,34 @@ class Department(models.Model):
     def __str__(self):
         return self.DepNo + '--' + self.DepName
 
+class Curriculum(models.Model):
+    cur_dep_FK = models.ForeignKey(Department, on_delete = models.CASCADE)
+    cCurriculum = models.CharField(max_length = 30)
+
+    def __str__(self):
+        return self.cur_dep_FK.DepName + '--' + self.cCurriculum
+
+class Lecturer(models.Model):
+    lec_dep_FK = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
+    LecturerID = models.CharField(max_length = 11)
+    LecturerName = models.CharField(max_length = 50)
+    LecturerAddress = models.CharField(max_length = 100, default=None, blank=True, null=True)
+    LecturerTel = models.CharField(max_length = 12, default=None, blank=True, null=True)
+    LecturerRating = models.FloatField()
+    LecturerEmail = models.CharField(max_length = 50, default=None, blank=True, null=True)
+
+    def __str__(self):
+        return self.LecturerName
+
+class LecturerResearch(models.Model):
+    reser_lec_FK = models.ForeignKey(Lecturer,on_delete=models.CASCADE)
+    ResearchName = models.CharField(max_length=30)
+    Category =	models.CharField(max_length=20)
+    Description = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.ResearchName + ' -- ' + self.Category
+
 class Student(models.Model):
     stu_dep_FK = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
     StudentID = models.CharField(max_length=11)
@@ -34,6 +62,14 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Advisor(models.Model):
+    adv_stu_FK = models.ForeignKey(Student, on_delete = models.CASCADE)
+    adv_lec_FK = models.ForeignKey(Lecturer, on_delete = models.CASCADE)
+    order = models.IntegerField()
+    def __str__(self):
+        return self.adv_stu_FK.name + '--'+ self.adv_lec_FK.LecturerName + '--' + str(self.order)
 
 class Subject(models.Model):
     sub_sec_FK = models.ForeignKey('Section', on_delete=models.CASCADE, blank=True, null=True)
@@ -54,6 +90,15 @@ class Section(models.Model):
 
     def __str__(self):
         return self.SectionNo
+
+class LecturerInSection(models.Model):
+    lecsec_sub_FK = models.ForeignKey(Subject, on_delete = models.CASCADE)
+    lecsec_sec_FK = models.ForeignKey(Section, on_delete = models.CASCADE)
+    lecsec_lec_FK = models.ForeignKey(Lecturer, on_delete = models.CASCADE)
+    order = models.IntegerField()
+
+    def __str__(self):
+        return self.lecsec_lec_FK.LecturerName + '--' + self.lecsec_sub_FK.SubjectName + '--' + self.lecsec_sec_FK.SectionNo + '--' + str(self.order)
 
 class History(models.Model):
     his_student_FK = models.ForeignKey(Student, on_delete=models.CASCADE)
