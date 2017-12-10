@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import  authenticate,login
 from django.urls import reverse_lazy
 from django.views.generic import View
-from .models import Department, Student, Subject
-from .forms import UserForm
+from .models import Department, Student, Subject, History
+from login.forms import UserForm
 
 
 class Home(generic.ListView):
@@ -17,7 +17,14 @@ class StudentFormView(generic.ListView):
     template_name = 'student/complex-form.html'
 
     def get_queryset(self):
+        return History.objects.all()
+
+class StudentManageView(generic.ListView):
+    template_name = 'student/studentmanage.html'
+
+    def get_queryset(self):
         return Subject.objects.all()
+
 
 class IndexView(generic.ListView):
     template_name = 'student/index.html'
@@ -37,12 +44,12 @@ class StudentIndexView(generic.ListView):
 
 class StudentCreate(CreateView):
     model = Student
-    fields = ['department', 'name', 'Degree', 'DOB', 'Tel', 'status']
+    fields = ['stu_dep_FK', 'name', 'Degree', 'DOB', 'Tel']
     success_url = reverse_lazy('student:index')
 
 class StudentUpdate(UpdateView):
     model = Student
-    fields = ['department', 'name', 'Degree', 'DOB', 'Tel', 'status']
+    fields = ['stu_dep_FK', 'name', 'Degree', 'DOB', 'Tel']
     success_url = reverse_lazy('student:index')
 
 class StudentDelete(DeleteView):

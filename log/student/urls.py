@@ -11,6 +11,8 @@ urlpatterns = [
 
     url(r'^studentform/$', views.StudentFormView.as_view(), name='studentform'),
 
+    url(r'^studentmanage/$', views.StudentManageView.as_view(), name='student-manage'),
+
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
 
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name = 'detail' ),
