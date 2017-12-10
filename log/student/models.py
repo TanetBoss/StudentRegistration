@@ -25,13 +25,22 @@ class Curriculum(models.Model):
     def __str__(self):
         return self.cur_dep_FK.DepName + '--' + self.cCurriculum
 
+class Credit(models.Model):
+    cre_cur_FK = models.ForeignKey(Curriculum, on_delete = models.CASCADE)
+    thYear = models.CharField(max_length = 1, default = '-')
+    CreditRequire = models.IntegerField()
+    Semester = models.CharField(max_length = 20, default='X/YYYY')
+
+    def __str__(self):
+        return self.cre_cur_FK.cCurriculum + '--' + 'yr' + self.thYear + '--' + self.Semester
+
 class Lecturer(models.Model):
     lec_dep_FK = models.ForeignKey(Department, on_delete = models.CASCADE, default='DEP')
     LecturerID = models.CharField(max_length = 11)
     LecturerName = models.CharField(max_length = 50)
     LecturerAddress = models.CharField(max_length = 100, default=None, blank=True, null=True)
     LecturerTel = models.CharField(max_length = 12, default=None, blank=True, null=True)
-    LecturerRating = models.FloatField()
+    LecturerRating = models.FloatField(default=None, blank=True, null=True)
     LecturerEmail = models.CharField(max_length = 50, default=None, blank=True, null=True)
 
     def __str__(self):
@@ -62,6 +71,20 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+
+class Register(models.Model):
+    RegNo = models.CharField(max_length=15)
+    Date = models.DateField()
+    reg_stu_FK = models.ForeignKey(Student, on_delete = models.CASCADE)
+    Cost = models.FloatField()
+    Discount = models.FloatField()
+    PaymentMethod = models.CharField(max_length = 10)
+    PaymentStatus = models.CharField(max_length = 10)
+    PaymentDate = models.DateField(default=None, blank=True, null=True)
+    Semester = models.CharField(max_length = 20, default='X/YYYY')
+
+    def __str__(self):
+        return self.RegNo
 
 
 class Advisor(models.Model):
