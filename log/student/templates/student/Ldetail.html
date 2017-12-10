@@ -89,10 +89,52 @@
                         </tbody>
                     </table>
 
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Right Song Info -->
+
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h1>All course</h1>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                           <th>Courser Name</th>
+                            <th>Section</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in lecturer.lecturerinsection_set.all %}
+                            <tr>
+                                <td>{{course.lecsec_sub_FK}}</td>
+                                <td>{{course.lecsec_sec_FK}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
 
         </div>
+
 
 
 
