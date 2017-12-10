@@ -75,12 +75,14 @@ class IndexView(generic.ListView):
         return Department.objects.all()
 
 
-class StudentIndexView(generic.ListView):
-    template_name = 'student/Sindex.html'
-    context_object_name = 'all_students'
+def StudentIndex(request):
+    all_students = Student.objects.all()
 
-    def get_queryset(self):
-        return Student.objects.all()
+    query = request.GET.get("q")
+    if query:
+        all_students = all_students.filter(name__icontains=query)
+
+    return render(request, 'student/Sindex.html',{'all_students': all_students})
 
 
 class StudentCreate(CreateView):
