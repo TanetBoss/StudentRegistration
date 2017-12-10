@@ -1,6 +1,8 @@
 from django.views import generic
+from django.http import HttpResponse
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.shortcuts import render, redirect
+from django.template import loader
 from django.contrib.auth import  authenticate,login
 from django.urls import reverse_lazy
 from django.views.generic import View
@@ -24,6 +26,45 @@ class StudentManageView(generic.ListView):
 
     def get_queryset(self):
         return Subject.objects.all()
+
+def AVGdepartment(request):
+    header_str = Student.objects.all()
+    template = loader.get_template('student/avg-department.html')
+    b = Department.objects.all()
+    count = b.count()
+    sum = 0
+    current = 0
+    list = []
+    divide = []
+    departmentname = []
+
+    for a in range(count):
+        list.append(0)
+        divide.append(0)
+        departmentname.append(0)
+
+    for department in Department.objects.all():
+        for student in header_str:
+            if student.stu_dep_FK.DepName == department.DepName :
+                departmentname[current] = department.DepName
+                list[current] = list[current] + student.GPAX
+                divide[current] = divide[current] + 1
+        current = current + 1
+
+# department[current] = str(department.DepName)
+
+    for a in range(count):
+        list[a] = list[a] / divide[a]
+
+    context = {
+        'count': count,
+        'department_list': Department.objects.all(),
+        'departmentname': departmentname,
+        'list': list,
+        'header_str': header_str,
+    }
+
+    return HttpResponse(template.render(context, request))
 
 
 class IndexView(generic.ListView):
@@ -55,8 +96,6 @@ class StudentUpdate(UpdateView):
 class StudentDelete(DeleteView):
     model = Student
     success_url = reverse_lazy('student:Sindex')
-
-
 
 class DetailView(generic.DetailView):
     model = Department

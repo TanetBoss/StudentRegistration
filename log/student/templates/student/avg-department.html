@@ -19,28 +19,30 @@
     <input type="text" id="myField" value="xxxxxx" />
     <input name="smname" id="smname" />
 
+    <h1>Average GPAX by department</h1>
+
     {% block body %}
-      {% for a in object_list %}
-      {% if a.his_student_FK.StudentID == user.username %}
-      <h3>>>ModuleFK:{{a.his_subject_FK.id}}----SubjectID:{{a.his_subject_FK.SubjectID}}
-        ----Subject:{{a.his_subject_FK.SubjectName}}----Prerequisite{{a.his_subject_FK.Prerequisite}}
-        ----Semester:{{a.his_subject_FK.Semester}}----Credit{{a.his_subject_FK.Credit}}
-
-      </h3>
-      <br>
-      {% endif %}
+    Department Count: {{count}}
+      <table class="table">
+          <thead>
+              <tr>
+      {% for a in departmentname %}
+                <th>
+                  {{a}}
+                </th>
       {% endfor %}
-
-      {% for a in object_list %}
-      {% if a.his_student_FK.StudentID == user.username and a.StudyYet %}
-      <h3>>>SubjectID:{{a.his_subject_FK.SubjectID}}
-        ----Subject:{{a.his_subject_FK.SubjectName}}----Prerequisite{{a.his_subject_FK.Prerequisite}}
-        ----Semester:{{a.his_subject_FK.Semester}}----Credit{{a.his_subject_FK.Credit}}
-
-      </h3>
-      <br>
-      {% endif %}
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+      {% for a in list %}
+                <td>
+              {{a}}
+                </td>
       {% endfor %}
+              </tr>
+          </tbody>
+      </table>
 
     {% endblock %}
 
