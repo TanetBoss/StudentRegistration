@@ -1,39 +1,30 @@
 {% extends 'student/Lbase.html' %}
 
-
   {% block body %}
   <body>
     <h3>student ID:{{user.username}}</h3>
     <br>
-    <a onclick="clickButton()" class="btn btn-success" >Click</a>
-    <input type="text" id="myField" value="xxxxxx" />
-    <input name="smname" id="smname" />
 
-    {% block body %}
-      {% for a in object_list %}
-      {% if a.his_student_FK.StudentID == user.username %}
-      <h3>>>ModuleFK:{{a.his_subject_FK.id}}----SubjectID:{{a.his_subject_FK.SubjectID}}
-        ----Subject:{{a.his_subject_FK.SubjectName}}----Prerequisite{{a.his_subject_FK.Prerequisite}}
-        ----Semester:{{a.his_subject_FK.Semester}}----Credit{{a.his_subject_FK.Credit}}
+    <hr>
+    {{listregNo}}<hr>
+    {{listdep}}<hr>
+    {{listprice}}<hr>
+    {{listdiscount}}<hr>
+    {{liststatus}}<hr>
+    <hr>
+    reg:{{regout}}
+    pin:{{aaa}}
+    currentStudentterm:{{bbb}}
+    bool:{{buttonbool}}
 
-      </h3>
-      <br>
-      {% endif %}
-      {% endfor %}
+    {% if buttonbool == True %}
+    <br>
+    <h1>You aren't complete registration in this semester</h1>
+    {% else%}
+    <h1></h1>
+    {% endif %}
 
-      {% for a in object_list %}
-      {% if a.his_student_FK.StudentID == user.username and a.StudyYet %}
-      <h3>>>SubjectID:{{a.his_subject_FK.SubjectID}}
-        ----Subject:{{a.his_subject_FK.SubjectName}}----Prerequisite{{a.his_subject_FK.Prerequisite}}
-        ----Semester:{{a.his_subject_FK.Semester}}----Credit{{a.his_subject_FK.Credit}}
-
-      </h3>
-      <br>
-      {% endif %}
-      {% endfor %}
-
-    {% endblock %}
-
+    <br>
     <a href="{% url 'home' %}" class="btn btn-success">Back to home</a>
 
   </body>
@@ -44,4 +35,10 @@ function clickButton(){
   var studentIDvar = document.getElementById("myField").value;
   document.getElementById('smname').value = studentIDvar;
 }
+
+function selectCourse(){
+  var studentIDvar = document.getElementById("myField").value;
+  document.getElementById('smname').value = '55555555555';
+}
+
 </script>

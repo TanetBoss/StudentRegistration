@@ -17,7 +17,7 @@ urlpatterns = [
 
     url(r'^students/$', views.StudentIndex, name='Sindex'),
 
-    url(r'^studentform/$', views.StudentFormView.as_view(), name='studentform'),
+    url(r'^studentform/$', views.StudentFormView, name='studentform'),
 
     url(r'^studentmanage/$', views.StudentManageView.as_view(), name='student-manage'),
 
