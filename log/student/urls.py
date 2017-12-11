@@ -51,5 +51,7 @@ urlpatterns = [
 
     url(r'course/lindex/assign/$', views.AssignLecturer.as_view(), name='course-assign'),
 
+    url(r'^course/$', views.CIndexView.as_view(), name='Cindex'),
+
 
 ]

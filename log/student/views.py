@@ -207,3 +207,11 @@ class AssignLecturer(CreateView):
     model = LecturerInSection
     fields = ['lecsec_sub_FK', 'lecsec_sec_FK', 'lecsec_lec_FK', 'order']
     success_url = reverse_lazy('student:Lindex')
+
+
+class CIndexView(generic.ListView):
+    template_name = 'student/Courseindex.html'
+    context_object_name = 'all_subjects'
+
+    def get_queryset(self):
+        return Subject.objects.all()
