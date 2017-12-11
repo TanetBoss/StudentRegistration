@@ -20,6 +20,7 @@ class Home(generic.ListView):
 
 class StudentManageView(generic.ListView):
     template_name = 'student/studentmanage.html'
+    context_object_name = 'all_student'
 
     def get_queryset(self):
         return Student.objects.all()
@@ -212,7 +213,7 @@ def StudentFormView(request):
             lprice.append(reg.Cost)
             ldiscount.append(reg.Discount)
             lstatus.append(reg.PaymentStatus)
-            if reg.Semester == reg.reg_stu_FK.CurrentSemester: #find current semester in his/her history
+            if reg.Semester == reg.reg_stu_FK.CurrentSemester and reg.PaymentStatus == 'Y': #find current semester in his/her history
                 buttonbool = False
             forboss = forboss + 1
 
@@ -448,3 +449,8 @@ class Test(generic.ListView):
 
     def get_queryset(self):
         return Student.objects.all()
+
+class RegisterUpdate(UpdateView):
+    model = Register
+    fields = ['PaymentMethod', 'PaymentStatus']
+    success_url = reverse_lazy('student:studentform')

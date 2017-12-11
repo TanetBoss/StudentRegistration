@@ -81,6 +81,8 @@ urlpatterns = [
 
     url(r'^studentmanage/test/$', views.Test.as_view(), name='Test'),
 
+    url(r'^studentmanage/test/(?P<pk>[0-9]+)/$', views.RegisterUpdate.as_view(), name='register-update'),
+
 
 
 ]
