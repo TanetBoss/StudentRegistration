@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+<br>
+
+<body>
+<div class="col-md-9 text-center">
+
+                        <h1> Analysis Report </h1>
+     <br><br><br>
+      <a href="{% url 'student:avg-dep' %}" class="btn btn-primary btn-lg"><h1> <i class="fa fa-users" aria-hidden="true"></i> Analysis Report - AVG dep </h1></a>
+      <br><br><br>
+      <a href="{% url 'student:totalc-dep' %}" class="btn btn-success btn-lg"><h1><i class="fa fa-money" aria-hidden="true"></i> Analysis Report - total revenue dep </h1></a>
+      <br><br><br>
+      <a href="{% url 'student:totalc-lec' %}" class="btn btn-warning btn-lg"><h1><i class="fa fa-user" aria-hidden="true"></i> Analysis Report - total count lecturer </h1></a>
+      <br><br><br>
+       <a href="{% url 'student:research-count' %}" class="btn btn-danger btn-lg"><h1> <i class="fa fa-book" aria-hidden="true"></i> Analysis Report - research categories </h1></a>
+    <br><br><br>
+    <a href="{% url 'home' %}" class="btn btn-success">Back to home</a>
+</div>
+</body>

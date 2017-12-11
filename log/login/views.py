@@ -2,7 +2,8 @@ from django.contrib.auth import login, authenticate
 from django.views.generic import View
 from login.forms import UserForm
 from django.shortcuts import render, redirect
-
+from django.http import HttpResponse
+from django.template import loader
 
 class UserFormView(View):
     form_class = UserForm
@@ -35,3 +36,7 @@ class UserFormView(View):
                     login(request,user)
                     return redirect('home')
         return render(request,self.template_name,{'form':form})
+
+
+
+
