@@ -48,8 +48,8 @@ def AVGdepartment(request):
 
     for department in Department.objects.all():
         for student in header_str:
+            departmentname[current] = department.DepName
             if student.stu_dep_FK.DepName == department.DepName :
-                departmentname[current] = department.DepName
                 list[current] = list[current] + student.GPAX
                 divide[current] = divide[current] + 1
         current = current + 1
@@ -87,8 +87,8 @@ def totalCostDep(request):
 
     for department in Department.objects.all():
         for regis in regis_str:
+            departmentname[current] = department.DepName
             if regis.reg_stu_FK.stu_dep_FK.DepName == department.DepName:
-                departmentname[current] = department.DepName
                 list[current] = list[current] + regis.Cost
 
                 debugger[current] = debugger[current] + 1
@@ -125,15 +125,12 @@ def totalCostLec(request):
 
     for department in Department.objects.all():
         for lecturer in lec_str:
+            departmentname[current] = department.DepName
             if lecturer.lec_dep_FK.DepName == department.DepName:
-                departmentname[current] = department.DepName
                 list[current] = list[current] + 1
-
-                debugger[current] = debugger[current] + 1
         current = current + 1
 
     context = {
-        'debug': debugger,
         'count': count,
         'department_list': Department.objects.all(),
         'departmentname': departmentname,
