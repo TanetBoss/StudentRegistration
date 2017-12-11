@@ -434,10 +434,17 @@ class AddSubject(generic.ListView):
 class SubjectUpdate(UpdateView):
     model = History
     fields = ['StudyYet']
-    success_url = reverse_lazy('student:student-manage')
+    success_url = reverse_lazy('student:Test')
 
 class SDetailView(generic.ListView):
     template_name = 'student/StudentProfile.html'
     context_object_name = 'all_students'
+    def get_queryset(self):
+        return Student.objects.all()
+
+class Test(generic.ListView):
+    template_name = 'student/TestCart.html'
+    context_object_name = 'all_student'
+
     def get_queryset(self):
         return Student.objects.all()
