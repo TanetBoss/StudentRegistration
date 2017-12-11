@@ -7,6 +7,12 @@ urlpatterns = [
 
     url(r'^$',views.IndexView.as_view(), name ='index'),
 
+    url(r'^researchc$',views.ResearchCount, name ='research-count'),
+
+    url(r'^totalclec/$', views.totalCostLec, name='totalc-lec'),
+
+    url(r'^totalcdep/$', views.totalCostDep, name='totalc-dep'),
+
     url(r'^avgdep/$', views.AVGdepartment, name='avg-dep'),
 
     url(r'^students/$', views.StudentIndex, name='Sindex'),

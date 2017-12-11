@@ -6,10 +6,13 @@ from django.template import loader
 from django.contrib.auth import  authenticate,login
 from django.urls import reverse_lazy
 from django.views.generic import View
-from .models import Department, Student, Subject, History
+from .models import Department, Student, Subject, History, Register
 from .models import Lecturer
 from .models import LecturerResearch
 from login.forms import UserForm
+from django.db.models import Count
+
+
 
 
 class Home(generic.ListView):
@@ -53,8 +56,6 @@ def AVGdepartment(request):
                 divide[current] = divide[current] + 1
         current = current + 1
 
-# department[current] = str(department.DepName)
-
     for a in range(count):
         list[a] = list[a] / divide[a]
 
@@ -64,6 +65,105 @@ def AVGdepartment(request):
         'departmentname': departmentname,
         'list': list,
         'header_str': header_str,
+    }
+
+    return HttpResponse(template.render(context, request))
+
+def totalCostDep(request):
+    header_str = Student.objects.all()
+    regis_str = Register.objects.all()
+    template = loader.get_template('student/totalCost-form.html')
+    b = Department.objects.all()
+    count = b.count()
+    sum = 0
+    current = 0
+    debugger = 0
+    list = []
+    departmentname = []
+    debugger = []
+
+    for a in range(count):
+        list.append(0)
+        departmentname.append(0)
+        debugger.append(0)
+
+    for department in Department.objects.all():
+        for regis in regis_str:
+            if regis.reg_stu_FK.stu_dep_FK.DepName == department.DepName:
+                departmentname[current] = department.DepName
+                list[current] = list[current] + regis.Cost
+
+                debugger[current] = debugger[current] + 1
+        current = current + 1
+
+    context = {
+        'debug': debugger,
+        'count': count,
+        'department_list': Department.objects.all(),
+        'departmentname': departmentname,
+        'list': list,
+        'header_str': header_str,
+    }
+
+    return HttpResponse(template.render(context, request))
+
+def totalCostLec(request):
+    header_str = Student.objects.all()
+    lec_str = Lecturer.objects.all()
+    template = loader.get_template('student/totalCost-lec.html')
+    b = Department.objects.all()
+    count = b.count()
+    sum = 0
+    current = 0
+    debugger = 0
+    list = []
+    departmentname = []
+    debugger = []
+
+    for a in range(count):
+        list.append(0)
+        departmentname.append(0)
+        debugger.append(0)
+
+    for department in Department.objects.all():
+        for lecturer in lec_str:
+            if lecturer.lec_dep_FK.DepName == department.DepName:
+                departmentname[current] = department.DepName
+                list[current] = list[current] + 1
+
+                debugger[current] = debugger[current] + 1
+        current = current + 1
+
+    context = {
+        'debug': debugger,
+        'count': count,
+        'department_list': Department.objects.all(),
+        'departmentname': departmentname,
+        'list': list,
+        'header_str': header_str,
+    }
+
+    return HttpResponse(template.render(context, request))
+
+def ResearchCount(request):
+    research_str = LecturerResearch.objects.all()
+    template = loader.get_template('student/researchcount-form.html')
+    extractResearch = LecturerResearch.objects.values('Category').annotate(dcount=Count('Category'))
+    lex = list(extractResearch)
+
+    nR = list()
+    cR = list()
+
+    for d in lex:
+        nR.append(d['dcount'])
+    for d in lex:
+        cR.append(d['Category'])
+
+
+
+    context = {
+        'count' :nR,
+        'Rname' :cR,
     }
 
     return HttpResponse(template.render(context, request))
