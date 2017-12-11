@@ -1,0 +1,24 @@
+{% extends 'student/base-student.html' %}
+
+{% block body %}
+    <h1>Student History page</h1>
+
+    <h2>{{student.name}}</h2>
+
+
+    {% for student in all_student %}
+        {% if student.StudentID == user.username %}
+            {% for history in student.history_set.all %}
+                {% if history.StudyYet == True %}
+                <ul>
+                    <li><a href="{% url 'student:history-detail' history.id %}">{{ history.his_subject_FK.SubjectID }} : {{ history.his_subject_FK.SubjectName }}</a></li>
+                </ul>
+                {% endif%}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+
+    <a href="{% url 'student:student-manage' %}" class="btn btn-success">Back to home</a>
+
+{% endblock %}

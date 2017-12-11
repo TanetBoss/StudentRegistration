@@ -1,8 +1,13 @@
-{% load staticfiles %}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% extends 'student/base-student.html' %}
 
-<h1>studentmange page</h1>
-<a href="{% url 'home' %}" class="btn btn-success">Back to home</a>
+
+{% block body %}
+    <h1>Student Manage</h1>
+        <ul>
+            <h2>History</h2>
+                <li><a href="{% url 'student:student-history' %}">See</a></li>
+        </ul>
+
+    <br><a href="{% url 'home' %}" class="btn btn-success">Back to home</a>
+
+{% endblock %}

@@ -67,6 +67,14 @@ urlpatterns = [
 
     url(r'course/lindex/delete/(?P<pk>[0-9]+)/$', views.CourseDelete.as_view(), name='course-delete'),
 
+    url(r'^studentmanage/history/$', views.StudentHistory.as_view(), name='student-history'),
+
+    url(r'^studentmanage/history/(?P<pk>[0-9]+)/$', views.HistoryDetail.as_view(), name='history-detail'),
+
+    url(r'^studentmanage/add/$', views.AddSubject.as_view(), name='add-subject'),
+
+    url(r'^studentmanage/add/(?P<pk>[0-9]+)/$', views.SubjectUpdate.as_view(), name='subject-update'),
+
 
 
 ]

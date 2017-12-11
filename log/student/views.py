@@ -22,13 +22,13 @@ class StudentFormView(generic.ListView):
     template_name = 'student/complex-form.html'
 
     def get_queryset(self):
-        return History.objects.all()
+        return Student.objects.all()
 
 class StudentManageView(generic.ListView):
     template_name = 'student/studentmanage.html'
 
     def get_queryset(self):
-        return Subject.objects.all()
+        return Student.objects.all()
 
 def AVGdepartment(request):
     header_str = Student.objects.all()
@@ -330,4 +330,27 @@ class CourseUpdate(UpdateView):
 class CourseDelete(DeleteView):
     model = Subject
     success_url = reverse_lazy('student:Cindex')
+
+class StudentHistory(generic.ListView):
+    template_name = 'student/history.html'
+    context_object_name = 'all_student'
+
+    def get_queryset(self):
+        return Student.objects.all()
+
+class HistoryDetail(generic.DetailView):
+    model = History
+    template_name = 'student/history-detail.html'
+
+class AddSubject(generic.ListView):
+    template_name = 'student/add-subject.html'
+    context_object_name = 'all_student'
+
+    def get_queryset(self):
+        return Student.objects.all()
+
+class SubjectUpdate(UpdateView):
+    model = History
+    fields = ['StudyYet']
+    success_url = reverse_lazy('student:student-manage')
 
