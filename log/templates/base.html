@@ -74,7 +74,7 @@
     {% if user.is_authenticated and user.is_superuser %} <!--admin-->
     <h1><font color="Grey">  What you want to do ? </font></h1>
        <br>
-      <a href="{% url 'student:index' %}" class="btn btn-warning btn-lg"><h1> <i class="fa fa-pencil fa-4x" aria-hidden="true"></i></span> Manage Department & Student</h1></a>
+      <a href="{% url 'student:index' %}" class="btn btn-warning btn-lg"><h1> <i class="fa fa-pencil fa-4x" aria-hidden="true"></i> Manage Department & Student</h1></a>
       <a href="{% url 'student:Lindex' %}" class="btn btn-danger btn-lg"><h1> <i class="fa fa-users fa-4x" aria-hidden="true"></i>Manage Lecturer</h1></a>
       <br><br><br>
            <a href="{% url 'analy' %}" class="btn btn-info btn-lg"><h1> <span class="glyphicon glyphicon-info-sign"></span> Analysis Report </h1></a>
