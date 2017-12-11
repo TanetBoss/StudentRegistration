@@ -13,8 +13,6 @@ from login.forms import UserForm
 from django.db.models import Count
 
 
-
-
 class Home(generic.ListView):
     template_name = 'student/home.html'
     def get_queryset(self):
