@@ -1,12 +1,19 @@
 {% extends 'student/base-student.html' %}
 
 {% block body %}
-    <h1>Subject Detail : </h1>
 
-    <h4>Subject ID : {{ history.his_subject_FK.SubjectID}}</h4>
-    <h4>Subject Name : {{ history.his_subject_FK.SubjectName}}</h4>
-    <h4>Grade : {{ history.Grade}}</h4>
+<div class="col-sm-8 col-md-9">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h1>Subject Detail : </h1>
 
-    <br><a href="{% url 'student:student-history' %}" class="btn btn-success">Back to home</a>
+            <h4>Subject ID : {{ history.his_subject_FK.SubjectID}}</h4>
+            <h4>Subject Name : {{ history.his_subject_FK.SubjectName}}</h4>
+            <h4>Grade : {{ history.Grade}}</h4>
+
+            <br><a href="{% url 'student:student-history' %}" class="btn btn-success">Back to home</a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

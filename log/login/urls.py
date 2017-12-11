@@ -9,6 +9,7 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^analytic/', TemplateView.as_view(template_name='analytic.html'), name ='analy'),
     url(r'^student/', include('student.urls'), name = 'student'),
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),

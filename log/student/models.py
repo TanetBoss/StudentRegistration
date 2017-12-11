@@ -77,6 +77,7 @@ class Student(models.Model):
     Status = models.CharField(max_length = 20, default='Normal')
     CurrentSemester = models.CharField(max_length = 20, default='X/YYYY')
     Curriculum = models.CharField(max_length = 20, default='CURRICULUM NAME')
+    StudentProfile = models.ImageField()
 
     def __str__(self):
         return self.name

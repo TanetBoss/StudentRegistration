@@ -63,6 +63,8 @@ urlpatterns = [
 
     url(r'history/lindex/upgrade/(?P<pk>[0-9]+)/$', views.HistoryUpdate.as_view(), name='history-grade'),
 
+    url(r'history/lindex/delete/(?P<pk>[0-9]+)/$', views.HistoryDelete.as_view(), name='history-delete'),
+
     url(r'course/lindex/upgrade/(?P<pk>[0-9]+)/$', views.CourseUpdate.as_view(), name='course-update'),
 
     url(r'course/lindex/delete/(?P<pk>[0-9]+)/$', views.CourseDelete.as_view(), name='course-delete'),
@@ -74,6 +76,8 @@ urlpatterns = [
     url(r'^studentmanage/add/$', views.AddSubject.as_view(), name='add-subject'),
 
     url(r'^studentmanage/add/(?P<pk>[0-9]+)/$', views.SubjectUpdate.as_view(), name='subject-update'),
+
+    url(r'^students/profile/$', views.SDetailView.as_view(), name='Sdetail'),
 
 
 

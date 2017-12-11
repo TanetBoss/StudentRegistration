@@ -255,12 +255,12 @@ def StudentIndex(request):
 
 class StudentCreate(CreateView):
     model = Student
-    fields = ['stu_dep_FK', 'name', 'Degree', 'DOB', 'Tel']
+    fields = ['stu_dep_FK', 'name', 'Degree', 'DOB', 'Tel','StudentProfile']
     success_url = reverse_lazy('student:index')
 
 class StudentUpdate(UpdateView):
     model = Student
-    fields = ['stu_dep_FK', 'name', 'Degree', 'DOB', 'Tel']
+    fields = ['stu_dep_FK', 'name', 'Degree', 'DOB', 'Tel','StudentProfile']
     success_url = reverse_lazy('student:index')
 
 class StudentDelete(DeleteView):
@@ -413,6 +413,10 @@ class HistoryDetail(generic.DetailView):
     model = History
     template_name = 'student/history-detail.html'
 
+class HistoryDelete(DeleteView):
+    model = History
+    success_url = reverse_lazy('student:Cindex')
+
 class AddSubject(generic.ListView):
     template_name = 'student/add-subject.html'
     context_object_name = 'all_student'
@@ -424,3 +428,9 @@ class SubjectUpdate(UpdateView):
     model = History
     fields = ['StudyYet']
     success_url = reverse_lazy('student:student-manage')
+
+class SDetailView(generic.ListView):
+    template_name = 'student/StudentProfile.html'
+    context_object_name = 'all_students'
+    def get_queryset(self):
+        return Student.objects.all()
