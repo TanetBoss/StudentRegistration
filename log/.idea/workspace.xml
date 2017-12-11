@@ -15,8 +15,11 @@
         <entry file="file://$PROJECT_DIR$/student/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2980">
-              <caret line="213" column="39" lean-forward="false" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
-              <folding />
+              <caret line="313" column="39" lean-forward="false" selection-start-line="313" selection-start-column="39" selection-end-line="313" selection-end-column="39" />
+              <folding>
+                <marker date="1512962379670" expanded="true" signature="4719:4725" ph="..." />
+                <marker date="1512962379670" expanded="true" signature="4719:4786" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -54,7 +57,7 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
+            <state relative-caret-position="997">
               <caret line="82" column="68" lean-forward="false" selection-start-line="82" selection-start-column="68" selection-end-line="82" selection-end-column="68" />
               <folding />
             </state>
@@ -97,7 +100,7 @@
         <entry file="file://$PROJECT_DIR$/student/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
-              <caret line="47" column="37" lean-forward="false" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+              <caret line="53" column="37" lean-forward="false" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -647,7 +650,7 @@
     <entry file="file://$PROJECT_DIR$/student/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
-          <caret line="47" column="37" lean-forward="false" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+          <caret line="53" column="37" lean-forward="false" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -673,8 +676,11 @@
     <entry file="file://$PROJECT_DIR$/student/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2980">
-          <caret line="213" column="39" lean-forward="false" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
-          <folding />
+          <caret line="313" column="39" lean-forward="false" selection-start-line="313" selection-start-column="39" selection-end-line="313" selection-end-column="39" />
+          <folding>
+            <marker date="1512962379670" expanded="true" signature="4719:4725" ph="..." />
+            <marker date="1512962379670" expanded="true" signature="4719:4786" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -712,7 +718,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
+        <state relative-caret-position="997">
           <caret line="82" column="68" lean-forward="false" selection-start-line="82" selection-start-column="68" selection-end-line="82" selection-end-column="68" />
           <folding />
         </state>
