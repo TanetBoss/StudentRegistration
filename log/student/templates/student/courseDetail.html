@@ -1,10 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+{% extends 'student/Lbase.html' %}
+{% block title %}{{ subject }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid subjects-container">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'student:Cdetail' subject.id %}">
+                    </a>
+                    <h1>{{ subject.SubjectID }}</h1>
+                    <h2>{{ subject.SubjectName }}</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Students</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Degree</th>
+                            <th>Grade</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for s in subject.history_set.all %}
+                            <tr>
+                                <td>{{ s.his_student_FK.name }}</td>
+                                <td>{{ s.his_student_FK.stu_dep_FK.DepName }}</td>
+                                <td>{{ s.his_student_FK.Degree }}</td>
+                                <td>{{ s.Grade }}</td>
+
+                                  <td>
+                                    <!--FIX HERE//-->
+                                    <a href="{% url 'student:history-grade' s.id %}" class="btn btn-primary btn-xs" role="button">
+                                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; Fill Grade
+                                    </a>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

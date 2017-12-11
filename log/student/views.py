@@ -315,3 +315,24 @@ class CIndexView(generic.ListView):
 
     def get_queryset(self):
         return Subject.objects.all()
+
+class CDetailView(generic.DetailView):
+    model = Subject
+    template_name = 'student/courseDetail.html'
+
+
+class HistoryUpdate(UpdateView):
+    model = History
+    fields = ['Grade']
+    success_url = reverse_lazy('student:Cindex')
+
+
+class CourseUpdate(UpdateView):
+    model = Subject
+    fields = ['sub_sec_FK', 'SubjectID', 'SubjectName', 'Prerequisite', 'Semester', 'Credit']
+    success_url = reverse_lazy('student:Cindex')
+
+class CourseDelete(DeleteView):
+    model = Subject
+    success_url = reverse_lazy('student:Cindex')
+
