@@ -23,18 +23,18 @@
 
 
                             <!-- View Details -->
-                            <a href="#" class="btn btn-primary btn-sm" role="button">
+                            <a href="{% url 'student:Cdetail' subject.id %}" class="btn btn-primary btn-sm" role="button">
                                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View Details
                             </a>
 
                             <!-- Update Detail -->
-                            <a href="#" class="btn btn-warning btn-sm" role="button">
+                            <a href="{% url 'student:course-update' subject.id %}" class="btn btn-warning btn-sm" role="button">
                                 <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; Edit
                             </a>
 
                             {% if user.is_superuser %}
                             <!-- Delete Album -->
-                            <form action="#" method="post" style="display: inline;">
+                            <form action="{% url 'student:course-delete' subject.id %}" method="post" style="display: inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="subject_id" value="{{ subject.id }}" />
                                 <button type="submit" class="btn btn-default btn-sm">
