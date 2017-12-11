@@ -13,33 +13,25 @@
   <body>
     <h3>student ID:{{user.username}}</h3>
     <br>
-    <a onclick="clickButton()" class="btn btn-success" >Click</a>
-    <input type="text" id="myField" value="xxxxxx" />
-    <input name="smname" id="smname" />
 
-    <h1>Average GPAX by department</h1>
-
+    <h1>Research count by category</h1>
     {% block body %}
-    Department Count: {{count}}
+
       <table class="table">
-          <thead>
               <tr>
-      {% for a in departmentname %}
+      {% for a in Rname  %}
                 <th>
                   {{a}}
                 </th>
       {% endfor %}
               </tr>
-          </thead>
-          <tbody>
               <tr>
-      {% for a in list %}
+      {% for a in count %}
                 <td>
               {{a}}
                 </td>
       {% endfor %}
               </tr>
-          </tbody>
       </table>
 
     {% endblock %}

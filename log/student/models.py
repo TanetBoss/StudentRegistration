@@ -121,7 +121,7 @@ class Section(models.Model):
     LessonTime = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.SectionNo
+        return '%s' % (self.SectionNo)
 
 class LecturerInSection(models.Model):
     lecsec_sub_FK = models.ForeignKey(Subject, on_delete = models.CASCADE)
