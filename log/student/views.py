@@ -157,10 +157,11 @@ def ResearchCount(request):
 
 
 def StudentFormView(request):
-    # user = User.objects.get(username=request.user.username)
     reg_str = Register.objects.order_by('RegNo')
     template = loader.get_template('student/complex-form.html')
     count = reg_str.count()
+    forboss = 0
+    loop_str = ''
     looping = 0
     buttonbool = True
     liststudentID = []
@@ -175,9 +176,6 @@ def StudentFormView(request):
     lprice = []
     ldiscount = []
     lstatus = []
-    debugger = []
-    aaa = []
-    bbb = []
 
     username = None
     if request.user.is_authenticated():
@@ -190,15 +188,12 @@ def StudentFormView(request):
         listprice.append(0)
         listdiscount.append(0)
         liststatus.append(0)
-        debugger.append(0)
         lstudentID.append(0)
         lregNo.append(0)
         ldep.append(0)
         lprice.append(0)
         ldiscount.append(0)
         lstatus.append(0)
-        aaa.append(0)
-        bbb.append(0)
 
     for reg in reg_str:
         liststudentID[looping] = reg.reg_stu_FK.StudentID
@@ -207,7 +202,6 @@ def StudentFormView(request):
         listprice[looping] = reg.Cost
         listdiscount[looping] = reg.Discount
         liststatus[looping] = reg.PaymentStatus
-        debugger[looping] = 0
         looping = looping + 1
 
     for reg in reg_str:
@@ -220,8 +214,22 @@ def StudentFormView(request):
             lstatus.append(reg.PaymentStatus)
             if reg.Semester == reg.reg_stu_FK.CurrentSemester: #find current semester in his/her history
                 buttonbool = False
+            forboss = forboss + 1
+
+    for a in range(count):
+        lstudentID.remove(0)
+        lregNo.remove(0)
+        ldep.remove(0)
+        lprice.remove(0)
+        ldiscount.remove(0)
+        lstatus.remove(0)
+
+    for a in range(forboss):
+        loop_str = loop_str + 'x'
 
     context = {
+        'loop_str':loop_str,
+        'count':count,
         'buttonbool':buttonbool,
         'liststudentID':lstudentID,
         'listregNo':lregNo,
@@ -229,7 +237,6 @@ def StudentFormView(request):
         'listprice':lprice,
         'listdiscount':ldiscount,
         'liststatus':lstatus,
-        'debugger':debugger,
     }
 
     return HttpResponse(template.render(context, request))
