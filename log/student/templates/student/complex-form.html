@@ -1,42 +1,89 @@
-{% extends 'student/Lbase.html' %}
-
+{% extends 'student/base-student.html' %}
 
   {% block body %}
   <body>
     <h3>student ID:{{user.username}}</h3>
     <br>
-    <a onclick="clickButton()" class="btn btn-success" >Click</a>
-    <input type="text" id="myField" value="xxxxxx" />
-    <input name="smname" id="smname" />
+    <div class="container-fluid students-container">
 
-    {% block body %}
-      {% for a in object_list %}
-      {% if a.his_student_FK.StudentID == user.username %}
-      <h3>>>ModuleFK:{{a.his_subject_FK.id}}----SubjectID:{{a.his_subject_FK.SubjectID}}
-        ----Subject:{{a.his_subject_FK.SubjectName}}----Prerequisite{{a.his_subject_FK.Prerequisite}}
-        ----Semester:{{a.his_subject_FK.Semester}}----Credit{{a.his_subject_FK.Credit}}
+        <div class="row">
 
-      </h3>
-      <br>
-      {% endif %}
-      {% endfor %}
+            <!-- Left Album Info -->
+            <div class="col-sm-4 col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                <h3  class="text text-center">Click View Details to see information</h3>
 
-      {% for a in object_list %}
-      {% if a.his_student_FK.StudentID == user.username and a.StudyYet %}
-      <h3>>>SubjectID:{{a.his_subject_FK.SubjectID}}
-        ----Subject:{{a.his_subject_FK.SubjectName}}----Prerequisite{{a.his_subject_FK.Prerequisite}}
-        ----Semester:{{a.his_subject_FK.Semester}}----Credit{{a.his_subject_FK.Credit}}
 
-      </h3>
-      <br>
-      {% endif %}
-      {% endfor %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                              <th>List</th>
+                              {% for r in loop_str %}
+                              <td>{{ forloop.counter }} </td>
+                              {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
 
-    {% endblock %}
+                                <tr>
+                                    <td>regNo</td>
+                                    {% for r in listregNo %}
+                                    <td>{{r}}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Department</td>
+                                    {% for r in listdep %}
+                                    <td>{{r}}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>cost</td>
+                                    {% for r in listprice %}
+                                    <td>{{r}}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Discount</td>
+                                    {% for r in listdiscount %}
+                                    <td>{{r}}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    {% for r in liststatus %}
+                                    <td>{{r}}</td>
+                                    {% endfor %}
+                                </tr>
+                              </tbody>
+                        </table>
+                              {% if buttonbool %}
+                            <h1><font color="red"> ยังไม่ได้ลงทะเบียน !!</font></h1>
 
+
+                              {%endif%}
+
+
+
+
+
+    {% if buttonbool == True %}
+    <br>
+    <h1>You aren't complete registration in this semester</h1>
+    {% else%}
+    <h1></h1>
+    {% endif %}
+
+    <br>
     <a href="{% url 'home' %}" class="btn btn-success">Back to home</a>
-
+    </div>
+    </div>
+</div>
+</div>
+</div>
   </body>
+
 {% endblock %}
 
 <script>
@@ -44,4 +91,10 @@ function clickButton(){
   var studentIDvar = document.getElementById("myField").value;
   document.getElementById('smname').value = studentIDvar;
 }
+
+function selectCourse(){
+  var studentIDvar = document.getElementById("myField").value;
+  document.getElementById('smname').value = '55555555555';
+}
+
 </script>

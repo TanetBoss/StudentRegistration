@@ -18,14 +18,9 @@ class Home(generic.ListView):
     def get_queryset(self):
         return Department.objects.all()
 
-class StudentFormView(generic.ListView):
-    template_name = 'student/complex-form.html'
-
-    def get_queryset(self):
-        return Student.objects.all()
-
 class StudentManageView(generic.ListView):
     template_name = 'student/studentmanage.html'
+    context_object_name = 'all_student'
 
     def get_queryset(self):
         return Student.objects.all()
@@ -154,11 +149,95 @@ def ResearchCount(request):
     for d in lex:
         cR.append(d['Category'])
 
-
-
     context = {
         'count' :nR,
         'Rname' :cR,
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
+def StudentFormView(request):
+    reg_str = Register.objects.order_by('RegNo')
+    template = loader.get_template('student/complex-form.html')
+    count = reg_str.count()
+    forboss = 0
+    loop_str = ''
+    looping = 0
+    buttonbool = True
+    liststudentID = []
+    listregNo = []
+    listdep = []
+    listprice = []
+    listdiscount = []
+    liststatus = []
+    lstudentID = []
+    lregNo = []
+    ldep = []
+    lprice = []
+    ldiscount = []
+    lstatus = []
+
+    username = None
+    if request.user.is_authenticated():
+        username = request.user.username
+
+    for a in range(count):
+        liststudentID.append(0)
+        listregNo.append(0)
+        listdep.append(0)
+        listprice.append(0)
+        listdiscount.append(0)
+        liststatus.append(0)
+        lstudentID.append(0)
+        lregNo.append(0)
+        ldep.append(0)
+        lprice.append(0)
+        ldiscount.append(0)
+        lstatus.append(0)
+
+    for reg in reg_str:
+        liststudentID[looping] = reg.reg_stu_FK.StudentID
+        listregNo[looping] = reg.RegNo
+        listdep[looping] = reg.reg_stu_FK.stu_dep_FK.DepName
+        listprice[looping] = reg.Cost
+        listdiscount[looping] = reg.Discount
+        liststatus[looping] = reg.PaymentStatus
+        looping = looping + 1
+
+    for reg in reg_str:
+        if username == reg.reg_stu_FK.StudentID:
+            lstudentID.append(reg.reg_stu_FK.StudentID)
+            lregNo.append(reg.RegNo)
+            ldep.append(reg.reg_stu_FK.stu_dep_FK.DepName)
+            lprice.append(reg.Cost)
+            ldiscount.append(reg.Discount)
+            lstatus.append(reg.PaymentStatus)
+            if reg.Semester == reg.reg_stu_FK.CurrentSemester and reg.PaymentStatus == 'Y': #find current semester in his/her history
+                buttonbool = False
+            forboss = forboss + 1
+
+    for a in range(count):
+        lstudentID.remove(0)
+        lregNo.remove(0)
+        ldep.remove(0)
+        lprice.remove(0)
+        ldiscount.remove(0)
+        lstatus.remove(0)
+
+    for a in range(forboss):
+        loop_str = loop_str + 'x'
+
+    context = {
+        'loop_str':loop_str,
+        'count':count,
+        'buttonbool':buttonbool,
+        'liststudentID':lstudentID,
+        'listregNo':lregNo,
+        'listdep':ldep,
+        'listprice':lprice,
+        'listdiscount':ldiscount,
+        'liststatus':lstatus,
     }
 
     return HttpResponse(template.render(context, request))
@@ -356,10 +435,22 @@ class AddSubject(generic.ListView):
 class SubjectUpdate(UpdateView):
     model = History
     fields = ['StudyYet']
-    success_url = reverse_lazy('student:student-manage')
+    success_url = reverse_lazy('student:Test')
 
 class SDetailView(generic.ListView):
     template_name = 'student/StudentProfile.html'
     context_object_name = 'all_students'
     def get_queryset(self):
         return Student.objects.all()
+
+class Test(generic.ListView):
+    template_name = 'student/TestCart.html'
+    context_object_name = 'all_student'
+
+    def get_queryset(self):
+        return Student.objects.all()
+
+class RegisterUpdate(UpdateView):
+    model = Register
+    fields = ['PaymentMethod', 'PaymentStatus']
+    success_url = reverse_lazy('student:studentform')

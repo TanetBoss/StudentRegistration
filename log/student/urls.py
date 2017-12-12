@@ -17,7 +17,7 @@ urlpatterns = [
 
     url(r'^students/$', views.StudentIndex, name='Sindex'),
 
-    url(r'^studentform/$', views.StudentFormView.as_view(), name='studentform'),
+    url(r'^studentform/$', views.StudentFormView, name='studentform'),
 
     url(r'^studentmanage/$', views.StudentManageView.as_view(), name='student-manage'),
 
@@ -73,11 +73,15 @@ urlpatterns = [
 
     url(r'^studentmanage/history/(?P<pk>[0-9]+)/$', views.HistoryDetail.as_view(), name='history-detail'),
 
-    url(r'^studentmanage/add/$', views.AddSubject.as_view(), name='add-subject'),
+    url(r'^studentmanage/test/add/$', views.AddSubject.as_view(), name='add-subject'),
 
-    url(r'^studentmanage/add/(?P<pk>[0-9]+)/$', views.SubjectUpdate.as_view(), name='subject-update'),
+    url(r'^studentmanage/test/add/(?P<pk>[0-9]+)/$', views.SubjectUpdate.as_view(), name='subject-update'),
 
     url(r'^students/profile/$', views.SDetailView.as_view(), name='Sdetail'),
+
+    url(r'^studentmanage/test/$', views.Test.as_view(), name='Test'),
+
+    url(r'^studentmanage/test/(?P<pk>[0-9]+)/$', views.RegisterUpdate.as_view(), name='register-update'),
 
 
 
