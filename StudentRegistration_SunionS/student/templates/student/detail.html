@@ -1,0 +1,81 @@
+
+{% extends 'student/base.html' %}
+{% block title %}{{ department }}{% endblock %}
+{% block departments_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid students-container">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'student:detail' department.id %}">
+                        {% if department.Dep_logo %}
+                            <img src="{{ department.Dep_logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1>{{ department.DepName }}</h1>
+                    <h2>Tel : {{ department.DepTel}}</h2>
+                    <h3>Head : </h3>
+                    <h4>{{ department.DepHead }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Students</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>DOB</th>
+                            <th>Tel</th>
+                            <th>Degree</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in department.student_set.all %}
+                            <tr>
+                                <td>{{ student.name }}</td>
+                                 <td>{{ student.DOB }}</td>
+                                 <td>{{ student.Tel }}</td>
+                                <td>{{ student.Degree }}</td>
+                                <td>
+                                    <form action="{% url 'student:student-delete' student.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="student_id" value="{{ student.id }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

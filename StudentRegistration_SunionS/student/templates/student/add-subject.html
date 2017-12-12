@@ -1,0 +1,44 @@
+{% extends 'student/base-student.html' %}
+
+{% block body %}
+<h1 style="text-indent: 280px; "><strong>Add Subject page</strong></h1>
+
+<div class="col-sm-4 col-md-8">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SubjectCode</th>
+                        <th>SubjectName</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in all_student %}
+                        {% if student.StudentID == user.username %}
+                            {% for history in student.history_set.all %}
+                                {% if history.StudyYet == False %}
+                                    <tr>
+                                        <td>{{ history.his_subject_FK.SubjectID }}</td>
+                                        <td>{{ history.his_subject_FK.SubjectName }}</td>
+                                        <td>
+                                            <a href="{% url 'student:subject-update' history.id %}" class="btn btn-primary btn-sm">
+                                                <span class="glyphicon glyphicon-plus"></span> Plus
+                                            </a>
+                                        </td>
+                                    </tr>
+                            {% endif%}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="{% url 'student:student-manage' %}" class="btn btn-success btn-lg"><i class="fa fa-arrow-left fa-1x" aria-hidden="true"></i> Back to home</a>
+</div>
+
+
+
+{% endblock %}

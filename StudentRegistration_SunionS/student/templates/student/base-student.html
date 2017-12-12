@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Home Page{% endblock%}</title>
+    {% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'student/Bg.css' %} " />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<nav class = "navbar navbar-inverse">
+    <p style="background-color:yellow">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <div class= "navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle ="collapse" data-target="">
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}"><font face="Satisfy" color="White"> Hello !! {{ user.username }} </font></a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right" >
+          <li class="">
+              <a href="{% url 'student:studentform' %}">
+                  <span class="glyphicon glyphicon-signal" aria-hidden="true"></span> &nbsp; Status
+              </a>
+          </li>
+            <li class="">
+                <a href="{% url 'logout' %}">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span> &nbsp; Logout
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+{% block body %}
+{% endblock %}
+
+</body>
+
+</html>

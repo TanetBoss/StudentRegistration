@@ -1,0 +1,133 @@
+{% extends 'student/Lbase.html' %}
+{% block tittle %}{{ lecturer }}{% endblock %}
+{% block lecturers_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid research-container">
+
+    <div class="row">
+
+       <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'student:Ldetail' lecturer.id %}">
+                        {% if lecturer.LecturerProfile %}
+                            <img src="{{ lecturer.LecturerProfile.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1>{{lecturer.LecturerDegree}} {{ lecturer.LecturerName }}</h1>
+                    <h3>DepNo:{{lecturer.lec_dep_FK}}</h3>
+                    <h3>ID:{{lecturer.LecturerID}}</h3>
+                    <h3>Address:{{lecturer.LecturerAddress}}</h3>
+                    <h3>Tel:{{lecturer.LecturerTel}}</h3>
+                    <h3>Email:{{lecturer.LecturerEmail}}</h3>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Right Song Info -->
+
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h1>All research</h1>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                           <th>ResearchName</th>
+                            <th>LecturerID</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for research in lecturer.lecturerresearch_set.all %}
+                            <tr>
+                                <td>{{research.ResearchName}}</td>
+                                <td>{{research.research_lec_FK}}</td>
+                                <td>{{research.Category}}</td>
+                                <td>{{research.Description}}</td>
+                                <td>
+                                    <form action="{% url 'student:research-delete' research.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="research_id" value="{{ research.id }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                        </button>
+                                    </form>
+                                 </td>
+                                 <td>
+                                    <!--FIX HERE//-->
+                                    <a href="{% url 'student:research-update' research.id %}" class="btn btn-primary btn-xs" role="button">
+                                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp; Edit
+                                    </a>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Right Song Info -->
+
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h1>All course</h1>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                           <th>Courser Name</th>
+                            <th>Section</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in lecturer.lecturerinsection_set.all %}
+                            <tr>
+                                <td>{{course.lecsec_sub_FK}}</td>
+                                <td>{{course.lecsec_sec_FK}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+{% endblock %}

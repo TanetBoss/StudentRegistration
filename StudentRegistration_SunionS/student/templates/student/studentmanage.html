@@ -1,0 +1,24 @@
+{% extends 'student/base-student.html' %}
+
+
+{% block body %}
+<h1 style="font-size: 40px;"><font color="Black">  <strong>Student Manage</strong> </font></h1>
+        <h2 style="font-size: 36px">Which one you want to do?</h2>
+            <a style="font-size: 40px;" href="{% url 'student:student-history' %}" class="btn btn-danger btn-lg" role="button"><i class="fa fa-book fa-4x" aria-hidden="true"></i> Student History</a>
+
+
+        {% for student in all_student %}
+                {% if student.StudentID == user.username %}
+                    {% for register in student.register_set.all %}
+                        {% if register.Semester == student.CurrentSemester and register.PaymentStatus == 'N' %}
+                            <br><br><a style="font-size: 40px;" href="{% url 'student:Test' %}" class="btn btn-warning btn-lg " role="button"><i class="fa fa-plus fa-4x" aria-hidden="true"></i> Course Registration</a>
+                        {% endif %}
+                    {% endfor%}
+                {% endif %}
+        {% endfor%}
+
+
+        <br><br>
+            <a style="font-size: 40px;" href="{% url 'home' %}" class="btn btn-success btn-lg"><i class="fa fa-backward fa-3x" aria-hidden="true"></i> Back to home</a>
+
+{% endblock %}
